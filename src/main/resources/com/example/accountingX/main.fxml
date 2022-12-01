@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="786.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.MainScreenController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1233.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Dosya">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#clickImportBankFlows" text="Banka Hareketleri'ni Yükle" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickCostForms" text="Masraf Formları" />
+            </items>
+          </Menu>
+          <Menu id="addMenu" mnemonicParsing="false" text="Ekle">
+            <items>
+                  <MenuItem id="addCostFormMenuItem" mnemonicParsing="false" onAction="#clickAddCostForm" text="Masraf Formu Ekle" />
+                  <MenuItem id="addPersonMenuItem" mnemonicParsing="false" onAction="#clickAddPerson" text="Kişi Ekle" />
+                  <MenuItem id="addTypeOfCostMenuItem" mnemonicParsing="false" onAction="#clickAddCostType" text="Gider Türü Ekle" />
+                  <MenuItem id="addKDV" mnemonicParsing="false" onAction="#clickAddKDV" text="KDV Ekle" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Toplam">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clickSumOfPersonWithYear" text="Kişi - Yıl" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickSumOfPersonWithMonth" text="Kişi - Ay" />
+                  <MenuItem fx:id="sumOfTotalWithTypes" mnemonicParsing="false" onAction="#clickSumOfTotalCost" text="Toplam" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickcostTypeBankFlow" text="Gider Türü -  Banka Hareketleri" />
+              </items>
+            </Menu>
+            <Menu fx:id="offDayMenu" mnemonicParsing="false" text="İzin Günleri">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clickAddOfDayMenu" text="İzin Günü Ekle" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickCancelOffDay" text="İzin İptal Etme" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickAddOfDayTypeMenu" text="İzin Günü Tipi Ekle" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickWorkingDaysMenu" text="Çalışılan Günler" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Avans">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clickAdvanveMoney" text="Avans Verme - Güncelleme" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Yönetici Özeti">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clickManagerSummaryTable" text="Yönetici Özeti Tablosu" />
+                  <MenuItem mnemonicParsing="false" onAction="#clickAddManagerReport" text="Yönetici Özeti Ekleme" />
+                  <MenuItem fx:id="exportReport" mnemonicParsing="false" onAction="#clickExportReport" text="Rapor Çıkar" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane fx:id="tabPane" layoutY="123.0" prefHeight="663.0" prefWidth="1233.0" style="-fx-background-color: #1C1C1C; -fx-border-color: #1C1C1C;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="costFormTab" text="Masraf Formları">
+               <content>
+                  <TableView fx:id="costFormTable" prefHeight="200.0" prefWidth="971.0" style="-fx-alignment: CENTER" stylesheets="@table.css">
+                    <columns>
+                        <TableColumn fx:id="noColumn" prefWidth="50.75" style="-fx-alignment: CENTER" text="No" />
+                        <TableColumn fx:id="voucherTableColumn" prefWidth="87.0" style="-fx-alignment: CENTER" text="Fiş" />
+                        <TableColumn fx:id="dateColumn" prefWidth="195.0" style="-fx-alignment: CENTER" text="Tarih" />
+                        <TableColumn fx:id="caseFlowColumn" prefWidth="473.0" style="-fx-alignment: CENTER" text="Kasa Hareketi" />
+                        <TableColumn fx:id="costTypeColumn" prefWidth="220.0" style="-fx-alignment: CENTER" text="Gider Türü" />
+                        <TableColumn fx:id="costColumn" prefWidth="200.0" style="-fx-alignment: CENTER" text="Tutar" />
+                    </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clickUpdateCostFlow" text="Güncelle" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+
+               </content>
+            </Tab>
+            <Tab fx:id="bankFlowTab" text="Banka Hareketleri">
+                <TableView fx:id="bankFlowTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@table.css">
+                  <columns>
+                      <TableColumn fx:id="idColumnBankFlow" prefWidth="50.75" style="-fx-alignment: CENTER" text="No" />
+                      <TableColumn fx:id="dateColumnBank" prefWidth="100.75" style="-fx-alignment: CENTER" text="Tarih" />
+                      <TableColumn fx:id="caseFlowColumnBank" prefWidth="780.75" style="-fx-alignment: CENTER" text="Kasa Hareketi" />
+                      <TableColumn fx:id="costTypeColumnBank" prefWidth="150.75" style="-fx-alignment: CENTER" text="Gider Türü" />
+                      <TableColumn fx:id="costColumnBank" prefWidth="120.75" style="-fx-alignment: CENTER" text="Tutar" />
+                  </columns>
+                  <contextMenu>
+                     <ContextMenu>
+                       <items>
+                           <MenuItem mnemonicParsing="false" onAction="#clickUpdateBankFlow" text="Güncelle" />
+                       </items>
+                     </ContextMenu>
+                  </contextMenu>
+                </TableView>
+            </Tab>
+            <Tab fx:id="userTab" text="Kişiler">
+               <content>
+                  <TableView fx:id="UsersTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@table.css">
+                    <columns>
+                      <TableColumn fx:id="nameColumn" prefWidth="600.0" reorderable="false" resizable="false" style="-fx-alignment: CENTER" text="Name" />
+                      <TableColumn fx:id="surnameColumn" prefWidth="600.0" reorderable="false" resizable="false" style="-fx-alignment: CENTER" text="Surname" />
+                    </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem fx:id="updatePersonMenuItem" mnemonicParsing="false" onAction="#clickUpdatePerson" text="Güncelle" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab fx:id="costTypeTab" text="Gider Türleri">
+               <content>
+                  <TableView fx:id="costTypeTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@table.css">
+                    <columns>
+                      <TableColumn fx:id="costTypeColumnCostTypeTable" prefWidth="1200.0" style="-fx-alignment: CENTER" text="Gider Türleri" />
+                    </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                              <MenuItem mnemonicParsing="false" onAction="#clickUpdateCostType" text="Güncelle" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="14.0" layoutY="49.0" prefHeight="17.0" prefWidth="79.0" text="Başlangıç Tarih" />
+      <Label layoutX="306.0" layoutY="49.0" text="Bitiş Tarihi" />
+      <DatePicker fx:id="startDatePicker" layoutX="103.0" layoutY="40.0" style="-fx-background-color: #272727;" />
+      <DatePicker fx:id="finishDatePicker" layoutX="368.0" layoutY="40.0" style="-fx-background-color: #272727;" />
+      <Button fx:id="filterButtonDate" layoutX="294.0" layoutY="85.0" mnemonicParsing="false" onAction="#filterByDate" text="Filtrele" />
+      <TextField fx:id="nameTextField" layoutX="617.0" layoutY="38.0" prefHeight="25.0" prefWidth="224.0" />
+      <Button fx:id="searchNameButton" layoutX="695.0" layoutY="85.0" mnemonicParsing="false" onAction="#filterSearchName" text="İsim Ara" />
+      <ChoiceBox fx:id="costTypeChoiceBox" layoutX="892.0" layoutY="40.0" prefHeight="35.0" prefWidth="203.0" />
+      <Label layoutX="857.0" layoutY="45.0" prefHeight="25.0" prefWidth="35.0" text="Tür" />
+      <Button fx:id="filterButtonCostType" layoutX="950.0" layoutY="85.0" mnemonicParsing="false" onAction="#clickFilterCostType" text="Filtrele" />
+      <Button layoutX="1095.0" layoutY="107.0" mnemonicParsing="false" onAction="#resetTableButton" text="Filtreleri Resetle" />
+   </children>
+   <stylesheets>
+      <URL value="@dark.css" />
+      <URL value="@table.css" />
+   </stylesheets>
+</AnchorPane>

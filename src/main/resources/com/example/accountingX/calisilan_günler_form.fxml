@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="846.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.WorkingDayController">
+   <children>
+      <Label layoutX="321.0" layoutY="24.0" prefHeight="56.0" prefWidth="205.0" style="-fx-text-fill: #0F9D58;" text="ÇALIŞILMAYAN GÜNLER" textAlignment="CENTER" textFill="#109754">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="personChoiceBox" layoutX="128.0" layoutY="128.0" prefHeight="35.0" prefWidth="203.0" />
+      <Label layoutX="42.0" layoutY="131.0" prefHeight="30.0" prefWidth="44.0" text="Kişi:" />
+      <ChoiceBox fx:id="yearChoiceBox" layoutX="412.0" layoutY="128.0" prefHeight="35.0" prefWidth="122.0" />
+      <Label layoutX="368.0" layoutY="131.0" prefHeight="30.0" prefWidth="44.0" text="Yıl" />
+      <ChoiceBox fx:id="monthChoiceBox" layoutX="626.0" layoutY="129.0" prefHeight="35.0" prefWidth="184.0" />
+      <Label layoutX="559.0" layoutY="132.0" prefHeight="30.0" prefWidth="44.0" text="Ay:" />
+      <Button fx:id="getButton" layoutX="302.0" layoutY="199.0" mnemonicParsing="false" onAction="#clickSaveButton" prefHeight="35.0" prefWidth="59.0" text="Getir" />
+      <ListView fx:id="costFormListView" layoutX="3.0" layoutY="250.0" prefHeight="420.0" prefWidth="840.0" />
+      <Label fx:id="sumOfWorkingDay" layoutX="747.0" layoutY="193.0" prefHeight="47.0" prefWidth="51.0" text="N/A" textFill="#119653">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="574.0" layoutY="202.0" prefHeight="30.0" prefWidth="150.0" style="-fx-text-fill: #0F9D58;" text="Çalışılan Toplam Gün:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="202.0" prefHeight="30.0" prefWidth="150.0" style="-fx-text-fill: #0F9D58;" text="Toplam İzin Günü:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="sumOfOffDay" layoutX="179.0" layoutY="193.0" prefHeight="47.0" prefWidth="51.0" text="N/A" textFill="#119653">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="exportOffDays" layoutX="418.0" layoutY="200.0" mnemonicParsing="false" onAction="#clickExportOffDay" prefHeight="35.0" prefWidth="111.0" text="Yıllık İzin Çıktısı" />
+   </children>
+</AnchorPane>

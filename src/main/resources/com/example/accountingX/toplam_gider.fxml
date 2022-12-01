@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="710.0" stylesheets="@dark.css"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.SumOfTotalCostWithTypes">
+   <children>
+      <Label fx:id="sumOfTotalLabel" layoutX="195.0" layoutY="14.0" prefHeight="54.0" prefWidth="320.0" style="-fx-text-fill: #0F9D58;" text="BUGÜNE KADAR HARCANAN MİKTAR">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="choiceBox" layoutX="183.0" layoutY="120.0" prefHeight="42.0" prefWidth="366.0" />
+      <Label layoutX="108.0" layoutY="120.0" prefHeight="42.0" prefWidth="44.0" style="-fx-text-fill: #0F9D58;" text="Tür">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="106.0" layoutY="309.0" prefHeight="35.0" prefWidth="290.0" style="-fx-text-fill: #0F9D58;" text="BUGÜNE KADAR TOPLAM MASRAF FORMU:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="costTypeTextField" editable="false" layoutX="217.0" layoutY="199.0" prefHeight="42.0" prefWidth="297.0" />
+      <TextField fx:id="sumOfCostFormsTextField" editable="false" layoutX="396.0" layoutY="309.0" prefWidth="209.0" />
+      <Label layoutX="130.0" layoutY="189.0" prefHeight="54.0" prefWidth="73.0" style="-fx-text-fill: #0F9D58;" text="TOPLAM:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="583.0" layoutY="129.0" mnemonicParsing="false" onAction="#clickGetButton" text="Getir" />
+      <Label layoutX="72.0" layoutY="366.0" prefHeight="35.0" prefWidth="313.0" style="-fx-text-fill: #0F9D58;" text="BUGÜNE KADAR TOPLAM BANKA HAREKETLERİ:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="sumOfBankFlowTextField" editable="false" layoutX="396.0" layoutY="366.0" prefWidth="209.0" />
+      <Label layoutX="258.0" layoutY="422.0" prefHeight="35.0" prefWidth="108.0" style="-fx-text-fill: #0F9D58;" text="GENEL TOPLAM">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="sumOfBothTextField" editable="false" layoutX="396.0" layoutY="422.0" prefWidth="209.0" />
+   </children>
+</AnchorPane>

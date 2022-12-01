@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="1011.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.ManagerTableController">
+   <children>
+      <Label layoutX="402.0" layoutY="20.0" prefHeight="54.0" prefWidth="204.0" style="-fx-text-fill: #0F9D58;" text="YÖNETİCİ ÖZETİ TABLO">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="-2.0" layoutY="135.0" prefHeight="580.0" prefWidth="1011.0">
+        <columns>
+          <TableColumn fx:id="dateTableColumn" prefWidth="150.0" text="Tarih" />
+          <TableColumn fx:id="descriptionTableColumn" minWidth="0.0" prefWidth="275.0" text="Açıklama" />
+            <TableColumn fx:id="debtTableColumn" minWidth="0.0" prefWidth="207.0" text="Borç Tutarı (€)" />
+            <TableColumn fx:id="exchangeRateTableColumn" prefWidth="147.0" text="Döviz Kuru" />
+            <TableColumn fx:id="resultAmountTableColumn" editable="false" minWidth="0.0" prefWidth="208.0" text="Borç Tutarı (₺)" />
+        </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#clickUpdate" text="Güncelle" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+      <RadioButton fx:id="fundFLowRadioButton" layoutX="253.0" layoutY="91.0" mnemonicParsing="false" text="Sermaye Hareketleri" />
+      <RadioButton fx:id="otherFlowRadioButton" layoutX="396.0" layoutY="91.0" mnemonicParsing="false" text="Şirkete Ait Olmayan Giderler" />
+      <RadioButton fx:id="treasureRadioButton" layoutX="584.0" layoutY="91.0" mnemonicParsing="false" text="Girdiler ve Mevcut Kıymetler" />
+   </children>
+   <stylesheets>
+      <URL value="@dark.css" />
+      <URL value="@table.css" />
+   </stylesheets>
+</AnchorPane>

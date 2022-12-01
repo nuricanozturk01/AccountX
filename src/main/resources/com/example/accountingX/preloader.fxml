@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="263.0" prefWidth="786.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.PreLoaderController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="203.0" fitWidth="432.0" layoutX="146.0" layoutY="30.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../../../accounting_generic.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

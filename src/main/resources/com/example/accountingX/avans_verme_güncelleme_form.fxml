@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="682.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.AdvanceMoneyController">
+   <children>
+      <Label layoutX="247.0" layoutY="25.0" prefHeight="39.0" prefWidth="201.0" style="-fx-text-fill: #0F9D58;" text="AVANS VERME FORMU" textFill="#109754">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="127.0" layoutY="559.0" prefHeight="39.0" prefWidth="113.0" style="-fx-text-fill: #0F9D58;" text="Avans Miktarı(₺)">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="amountTextField" layoutX="259.0" layoutY="561.0" prefHeight="39.0" prefWidth="192.0" />
+      <Button fx:id="saveButton" layoutX="283.0" layoutY="613.0" mnemonicParsing="false" onAction="#clickSave" text="Kaydet" />
+      <ChoiceBox fx:id="personChoiceBox" layoutX="223.0" layoutY="117.0" prefHeight="42.0" prefWidth="232.0" />
+      <Label layoutX="176.0" layoutY="117.0" prefHeight="42.0" prefWidth="44.0" style="-fx-text-fill: #0F9D58;" text="Kişi">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="173.0" layoutY="196.0" prefHeight="42.0" prefWidth="44.0" style="-fx-text-fill: #0F9D58;" text="Tarih">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="getButton" layoutX="289.0" layoutY="273.0" mnemonicParsing="false" onAction="#clickGet" text="Getir" />
+      <ListView fx:id="advanceAmountListView" layoutX="3.0" layoutY="320.0" prefHeight="212.0" prefWidth="676.0" />
+      <DatePicker fx:id="datePicker" layoutX="223.0" layoutY="200.0" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #272727;" />
+   </children>
+</AnchorPane>
