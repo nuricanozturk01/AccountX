@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="1011.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.ManagerTableController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="1011.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.ManagerTableController">
    <children>
       <Label layoutX="402.0" layoutY="20.0" prefHeight="54.0" prefWidth="204.0" style="-fx-text-fill: #0F9D58;" text="YÖNETİCİ ÖZETİ TABLO">
          <font>
@@ -19,11 +19,11 @@
       </Label>
       <TableView fx:id="table" layoutX="-2.0" layoutY="135.0" prefHeight="580.0" prefWidth="1011.0">
         <columns>
-          <TableColumn fx:id="dateTableColumn" prefWidth="150.0" text="Tarih" />
-          <TableColumn fx:id="descriptionTableColumn" minWidth="0.0" prefWidth="275.0" text="Açıklama" />
-            <TableColumn fx:id="debtTableColumn" minWidth="0.0" prefWidth="207.0" text="Borç Tutarı (€)" />
-            <TableColumn fx:id="exchangeRateTableColumn" prefWidth="147.0" text="Döviz Kuru" />
-            <TableColumn fx:id="resultAmountTableColumn" editable="false" minWidth="0.0" prefWidth="208.0" text="Borç Tutarı (₺)" />
+          <TableColumn fx:id="dateTableColumn" style="-fx-alignment: CENTER" prefWidth="150.0" text="Tarih" />
+          <TableColumn fx:id="descriptionTableColumn" style="-fx-alignment: CENTER" minWidth="0.0" prefWidth="275.0" text="Açıklama" />
+            <TableColumn fx:id="debtTableColumn" minWidth="0.0" style="-fx-alignment: CENTER" prefWidth="207.0" text="Borç Tutarı (€)" />
+            <TableColumn fx:id="exchangeRateTableColumn" style="-fx-alignment: CENTER" prefWidth="147.0" text="Döviz Kuru" />
+            <TableColumn fx:id="resultAmountTableColumn" style="-fx-alignment: CENTER" editable="false" minWidth="0.0" prefWidth="208.0" text="Borç Tutarı (₺)" />
         </columns>
          <contextMenu>
             <ContextMenu>

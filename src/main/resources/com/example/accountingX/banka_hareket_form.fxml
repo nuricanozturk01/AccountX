@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="675.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.UpdateBankFlowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="593.0" prefWidth="675.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.UpdateBankFlowController">
    <children>
       <Label layoutX="176.0" layoutY="14.0" prefHeight="66.0" prefWidth="353.0" style="-fx-text-fill: #0f9d58;" text="BANKA HAREKETİ GÜNCELLEME FORMU" textFill="#109c56">
          <font>

@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0"
             prefWidth="527.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.CostTypeController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.CostTypeController">
    <Label layoutX="157.0" layoutY="14.0" prefHeight="41.0" prefWidth="250.0" style="-fx-text-fill: #0F9D58;"
           text="GİDER TÜRÜ EKLEME FORMU">
       <font>

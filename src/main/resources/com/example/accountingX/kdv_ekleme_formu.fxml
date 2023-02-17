@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0"
             prefWidth="506.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.KDVController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.KDVController">
 
    <Label layoutX="153.0" layoutY="26.0" prefHeight="39.0" prefWidth="192.0" style="-fx-text-fill: #0F9D58;"
           text="KDV EKLEME FORMU" textFill="#109754">

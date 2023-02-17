@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="682.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.AdvanceMoneyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="682.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.AdvanceMoneyController">
    <children>
       <Label layoutX="247.0" layoutY="25.0" prefHeight="39.0" prefWidth="201.0" style="-fx-text-fill: #0F9D58;" text="AVANS VERME FORMU" textFill="#109754">
          <font>
@@ -36,6 +36,16 @@
       </Label>
       <Button fx:id="getButton" layoutX="289.0" layoutY="273.0" mnemonicParsing="false" onAction="#clickGet" text="Getir" />
       <ListView fx:id="advanceAmountListView" layoutX="3.0" layoutY="320.0" prefHeight="212.0" prefWidth="676.0" />
-      <DatePicker fx:id="datePicker" layoutX="223.0" layoutY="200.0" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #272727;" />
+      <DatePicker fx:id="datePicker" editable="false" layoutX="223.0" layoutY="200.0" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #272727;" />
+      <Label layoutX="412.0" layoutY="269.0" prefHeight="39.0" prefWidth="119.0" style="-fx-text-fill: #0F9D58;" text="Net Kalan Miktar:" textFill="#109754">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="netAdvanceAmountLabel" layoutX="541.0" layoutY="269.0" prefHeight="39.0" prefWidth="132.0" textAlignment="CENTER" textFill="#109754">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

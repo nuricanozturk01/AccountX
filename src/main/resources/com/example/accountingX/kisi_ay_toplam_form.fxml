@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="673.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.SumOfPersonWithMonth">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="673.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.SumOfPersonWithMonth">
    <children>
       <Label layoutX="165.0" layoutY="25.0" prefHeight="54.0" prefWidth="320.0" style="-fx-text-fill: #0F9D58;" text="BUGÜNE KADAR HARCANAN MİKTAR">
          <font>

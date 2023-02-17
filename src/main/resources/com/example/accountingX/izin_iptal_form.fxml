@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="304.0" prefWidth="741.0"
             stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.accountingX.Controller.CancelOffDayController">
+            fx:controller="com.example.accountx.Controller.CancelOffDayController">
    <children>
       <Label layoutX="288.0" layoutY="14.0" prefHeight="35.0" prefWidth="165.0" style="-fx-text-fill: #0F9D58;" text="İZİN İPTAL FORMU" textAlignment="RIGHT">
          <font>
@@ -18,11 +18,11 @@
          </font>
       </Label>
       <Label layoutX="42.0" layoutY="193.0" prefHeight="17.0" prefWidth="79.0" text="Başlangıç Tarih" />
-      <DatePicker fx:id="startDatePicker" layoutX="140.0" layoutY="184.0" style="-fx-background-color: #272727;" />
+      <DatePicker fx:id="startDatePicker" editable="false" layoutX="140.0" layoutY="184.0" style="-fx-background-color: #272727;" />
       <ChoiceBox fx:id="personChoiceBox" layoutX="306.0" layoutY="118.0" prefHeight="35.0" prefWidth="203.0" />
       <Label layoutX="220.0" layoutY="121.0" prefHeight="30.0" prefWidth="44.0" text="Kişi:" />
       <Button fx:id="saveButton" layoutX="334.0" layoutY="251.0" mnemonicParsing="false" onAction="#clickSaveButton" onKeyPressed="#pressSave" text="İptal Et" />
       <Label layoutX="377.0" layoutY="193.0" prefHeight="17.0" prefWidth="79.0" text="Bitiş Tarih" />
-      <DatePicker fx:id="finishDatePicker" layoutX="475.0" layoutY="184.0" style="-fx-background-color: #272727;" />
+      <DatePicker fx:id="finishDatePicker" editable="false" layoutX="475.0" layoutY="184.0" style="-fx-background-color: #272727;" />
    </children>
 </AnchorPane>

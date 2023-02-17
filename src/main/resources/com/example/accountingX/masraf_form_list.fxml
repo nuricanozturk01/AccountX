@@ -4,11 +4,13 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="749.0"
-            stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.CostFormListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="749.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.CostFormListController">
    <children>
       <ChoiceBox fx:id="userChoiceBox" layoutX="208.0" layoutY="133.0" prefHeight="46.0" prefWidth="281.0" />
       <Label layoutX="60.0" layoutY="137.0" prefHeight="38.0" prefWidth="137.0" text="Kişiyi Seçiniz">
@@ -16,12 +18,23 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="278.0" layoutY="20.0" prefHeight="52.0" prefWidth="193.0" style="-fx-text-fill: #0F9D58;" text="MASRAF FORMLARI">
+      <Label layoutX="278.0" layoutY="57.0" prefHeight="38.0" prefWidth="193.0" style="-fx-text-fill: #0F9D58;" text="MASRAF FORMLARI">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ListView fx:id="costFormListView" layoutY="207.0" prefHeight="422.0" prefWidth="749.0" />
       <Button fx:id="getButton" layoutX="528.0" layoutY="144.0" mnemonicParsing="false" onAction="#clickGetButton" prefHeight="38.0" prefWidth="72.0" text="Getir" />
+      <MenuBar fx:id="menu" layoutY="2.0" prefHeight="25.0" prefWidth="740.0">
+         <menus>
+            <Menu fx:id="file" mnemonicParsing="false" text="Seçenekler">
+               <items>
+                  <MenuItem fx:id="exportExcel" mnemonicParsing="false" text="Kişi - Yıl" />
+                  <MenuItem mnemonicParsing="false" text="Yıl" />
+                  <MenuItem mnemonicParsing="false" text="Yıl - Gider Türü" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

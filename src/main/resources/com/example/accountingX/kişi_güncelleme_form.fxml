@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="304.0" prefWidth="522.0"
             stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18"
-            fx:controller="com.example.accountingX.Controller.UpdatePersonController" xmlns:fx="http://javafx.com/fxml/1">
+            fx:controller="com.example.accountx.Controller.UpdatePersonController" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="nameTextField" onKeyPressed="#pressedEnterOnSurname" layoutX="118.0" layoutY="108.0" prefHeight="47.0" prefWidth="287.0" promptText="İsim" />
       <TextField fx:id="surnameTextField" onKeyPressed="#pressedEnterOnSurname" layoutX="118.0" layoutY="163.0" prefWidth="287.0" promptText="Soyisim" />

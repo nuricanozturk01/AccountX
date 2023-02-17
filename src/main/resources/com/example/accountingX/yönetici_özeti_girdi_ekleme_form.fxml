@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.ManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.ManagerController">
    <stylesheets>
       <URL value="@dark.css" />
       <URL value="@table.css" />
@@ -21,7 +21,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <DatePicker fx:id="datePicker" layoutX="123.0" layoutY="172.0" style="-fx-background-color: #272727;" />
+      <DatePicker fx:id="datePicker" editable="false" layoutX="123.0" layoutY="172.0" style="-fx-background-color: #272727;" />
       <Label layoutX="22.0" layoutY="172.0" prefHeight="35.0" prefWidth="85.0" text="Tarih">
          <font>
             <Font size="14.0" />

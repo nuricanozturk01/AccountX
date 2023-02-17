@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="536.0"
             stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.accountingX.Controller.AddOffDayTypeController">
+            fx:controller="com.example.accountx.Controller.AddOffDayTypeController">
    <children>
       <Label layoutX="135.0" layoutY="20.0" prefHeight="39.0" prefWidth="290.0" style="-fx-text-fill: #0F9D58;" text="İZİN GÜNÜ TİPİ EKLEME FORMU" textFill="#109754">
          <font>

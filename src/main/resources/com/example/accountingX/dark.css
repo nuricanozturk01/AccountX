@@ -1,5 +1,4 @@
 {
-
     -fx-primary: #1C1C1C;
     -fx-secondary: #0F9D58;
     -fx-primarytext: #B2B2B2;
@@ -11,8 +10,6 @@
 .root
 {
     -fx-background-color: -fx-primary;
-
-
 }
 .button
 {
@@ -133,8 +130,6 @@
 .date-picker .cell:focused {
 	-fx-background-color: #1c1c1c;
 }
-
-
 .date-picker .selected {
 	-fx-background-color: -fx-primary-color;
 	-fx-text-fill: white;

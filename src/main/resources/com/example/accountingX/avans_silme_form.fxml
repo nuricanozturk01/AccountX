@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="507.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.DeleteAdvanceMoneyController">
+   <children>
+      <Label layoutX="150.0" layoutY="37.0" prefHeight="35.0" prefWidth="207.0" style="-fx-text-fill: #0F9D58;" text="AVANS SİLME FORMU" textFill="#109754">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="personChoiceBox" layoutX="156.0" layoutY="121.0" prefHeight="42.0" prefWidth="232.0" />
+      <Label layoutX="109.0" layoutY="121.0" prefHeight="42.0" prefWidth="44.0" style="-fx-text-fill: #0F9D58;" text="Kişi">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="106.0" layoutY="200.0" prefHeight="42.0" prefWidth="44.0" style="-fx-text-fill: #0F9D58;" text="Tarih">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="getButton" layoutX="229.0" layoutY="266.0" mnemonicParsing="false" onAction="#clickGet" text="Getir" />
+      <DatePicker fx:id="datePicker" editable="false" layoutX="156.0" layoutY="204.0" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #272727;" />
+      <TextField fx:id="existingAmountTextField" editable="false" layoutX="169.0" layoutY="381.0" prefHeight="42.0" prefWidth="169.0" />
+      <Label layoutX="164.0" layoutY="323.0" prefHeight="42.0" prefWidth="179.0" style="-fx-text-fill: #0F9D58;" text="Verilen Avans Mİktarı (₺)">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="223.0" layoutY="441.0" mnemonicParsing="false" onAction="#clickDelete" prefHeight="35.0" prefWidth="61.0" text="Sil" />
+   </children>
+</AnchorPane>

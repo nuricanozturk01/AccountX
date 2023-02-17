@@ -15,16 +15,16 @@ module com.example.yediiklim
     requires org.apache.poi.ooxml;
     requires org.apache.xmlbeans;
 
-    opens com.example.accountingX to javafx.fxml;
-    exports com.example.accountingX;
-    opens com.example.accountingX.Entity to javafx.fxml, org.hibernate.orm.core;
-    exports com.example.accountingX.Entity;
-    exports com.example.accountingX.Service;
-    opens com.example.accountingX.Service to javafx.fxml;
-    exports com.example.accountingX.util;
-    opens com.example.accountingX.util to javafx.fxml;
-    exports com.example.accountingX.HibernateConfiguration;
-    opens com.example.accountingX.HibernateConfiguration to javafx.fxml;
-    exports com.example.accountingX.Controller;
-    opens com.example.accountingX.Controller to javafx.fxml;
+    opens com.example.accountx to javafx.fxml;
+    exports com.example.accountx;
+    opens com.example.accountx.Entity to javafx.fxml, org.hibernate.orm.core;
+    exports com.example.accountx.Entity;
+    exports com.example.accountx.Service;
+    opens com.example.accountx.Service to javafx.fxml;
+    exports com.example.accountx.util;
+    opens com.example.accountx.util to javafx.fxml;
+    exports com.example.accountx.HibernateConfiguration;
+    opens com.example.accountx.HibernateConfiguration to javafx.fxml;
+    exports com.example.accountx.Controller;
+    opens com.example.accountx.Controller to javafx.fxml;
 }

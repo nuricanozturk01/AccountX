@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="650.0"
             stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.accountingX.Controller.DatabaseErrorController">
+            fx:controller="com.example.accountx.Controller.DatabaseErrorController">
    <children>
       <ImageView fitHeight="106.0" fitWidth="111.0" layoutX="46.0" layoutY="39.0">
          <image>

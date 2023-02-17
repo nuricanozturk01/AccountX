@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="758.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountingX.Controller.UpdateCostFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="758.0" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.accountx.Controller.UpdateCostFormController">
 
    <DatePicker fx:id="dateDatePicker" layoutX="181.0" layoutY="79.0" style="-fx-background-color: #272727;" />
    <Label layoutX="268.0" layoutY="27.0" prefHeight="35.0" prefWidth="266.0" style="-fx-text-fill: #0F9D58;" text="MASRAF GÜNCELLEME FORMU" textAlignment="RIGHT">
