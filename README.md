@@ -5,6 +5,20 @@
 #### Bu program muhasebe departmanı için harcama kontrolü, hesap detayları, izin günleri, avans kontrolü, Yönetici Özeti, Banka Hareketleri gibi bölümleri içerir.
 
 ##### Bu proje ile kasaya giriş çıkışları takip edebilir, çalışanlarınızın izinlerini ayarlayabilir, Toplam Giderlerinizi görebilir ve bunları gider türüne göre ayırabilir ve Yönetici Özeti Raporu ile genel olarak durumu görebilirsiniz.
+
+ - Şimdilik veritabanını paylaşmıyorum.
+## Yeni Eklenenler (v2.0)
+ - Toplu Gider Türü Seçme ve belirleme.
+ - Toplu Banka Hareketleri ve Masraf Formu Silme (Tarih aralığına göre)
+ - Filtreleme özelliği iyileştirildi
+ - Avans miktarı aktarmadaki hatalar giderildi
+ - İstenilen kullanıcının o yıla ait tüm avanslarını görüntüleme
+ - Gider Türüne Silme Özelliği Getirildi. (Eğer gider türü daha önce hiç kullanılmamışsa)
+ - Sayı formatları okunabilir hale geldi
+ - Filtreleyerek Excel çıktısı alma eklendi.
+## Eklenecekler (v3.0)
+ - Undo özelliği
+ //....
 ## EKRAN ÇIKTILARI:
 ### Ana Menü
 ![1](https://user-images.githubusercontent.com/62218588/205112187-86cd75d8-02e2-49eb-9799-8ffd11cc2cf0.png)
