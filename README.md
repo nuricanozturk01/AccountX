@@ -18,7 +18,7 @@
  - Filtreleyerek Excel çıktısı alma eklendi.
 ## Eklenecekler (v3.0)
  - Undo özelliği
- //....
+ - //....
 ## EKRAN ÇIKTILARI:
 ### Ana Menü
 ![1](https://user-images.githubusercontent.com/62218588/205112187-86cd75d8-02e2-49eb-9799-8ffd11cc2cf0.png)
