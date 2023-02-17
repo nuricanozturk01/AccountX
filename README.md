@@ -6,7 +6,7 @@
 
 ##### Bu proje ile kasaya giriş çıkışları takip edebilir, çalışanlarınızın izinlerini ayarlayabilir, Toplam Giderlerinizi görebilir ve bunları gider türüne göre ayırabilir ve Yönetici Özeti Raporu ile genel olarak durumu görebilirsiniz.
 
- - Şimdilik veritabanını paylaşmıyorum.
+ - Şimdilik veritabanını paylaşmıyorum çok isterseniz siz kendiniz yazabilirsiniz. (SessionFactory sınıfı ve entity paketi içindekilere göre)
 ## Yeni Eklenenler (v2.0)
  - Toplu Gider Türü Seçme ve belirleme.
  - Toplu Banka Hareketleri ve Masraf Formu Silme (Tarih aralığına göre)
