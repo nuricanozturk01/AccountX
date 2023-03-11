@@ -24,8 +24,7 @@
  
 ## EKRAN ÇIKTILARI:
 ### Ana Menü
-![1](https://user-images.githubusercontent.com/62218588/205112187-86cd75d8-02e2-49eb-9799-8ffd11cc2cf0.png)
-
+![main](https://user-images.githubusercontent.com/62218588/224510240-4abe3729-0d76-4aa1-bd8a-2f9223fdbe45.jpg)
 
 ### Dosya -> Masraf Formları Sekmesi
 ![2](https://user-images.githubusercontent.com/62218588/205112232-9512784f-587f-4aca-b217-68d974109e9a.png)
