@@ -17,9 +17,9 @@
  - Sayı formatları okunabilir hale geldi
  - Filtreleyerek Excel çıktısı alma eklendi.
  
-## Eklenecekler (v3.0)
+## Eklendi (v3.0)
  - Undo özelliği [EKLENDİ] Command Pattern ile
-## (v3.1)
+## BUG FIXING(v3.1)
  - Bug Fixing....
  
 ## EKRAN ÇIKTILARI:
