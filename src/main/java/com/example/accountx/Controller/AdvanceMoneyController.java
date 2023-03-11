@@ -6,11 +6,13 @@ import com.example.accountx.HibernateConfiguration.SessionFactoryManager;
 import com.example.accountx.util.UtilFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import static com.example.accountx.HibernateConfiguration.SessionFactoryManager.update;
+
 import static com.example.accountx.HibernateConfiguration.SessionFactoryManager.add;
+import static com.example.accountx.HibernateConfiguration.SessionFactoryManager.update;
 public class AdvanceMoneyController
 {
     @FXML

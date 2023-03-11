@@ -11,8 +11,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
+import static com.example.accountx.HibernateConfiguration.SessionFactoryManager.updateAll;
 public class MultipleSelectCostTypeController
 {
     public ChoiceBox<CostType> costTypeChoiceBox;
@@ -41,12 +43,16 @@ public class MultipleSelectCostTypeController
                 throw new EmptyFieldException("Banka Hareketi Seçmediniz....");
 
             m_bankFlows.forEach(bf -> bf.setCostType(type.getCostType()));
-            SessionFactoryManager.updateAll(m_bankFlows);
 
-            bankFlowTable.refresh();
 
-            m_bankFlows.forEach(bf -> {bf.setMark(false);});
+            //controller.acceptUpdate(MULTIPLE_BANK_FLOW, new MultipleBankFlowDTO(flows, UPDATE));
+
+            updateAll(new ArrayList<>(m_bankFlows));
+
+            m_bankFlows.forEach(bf -> bf.setMark(false));
             m_bankFlows.clear();
+            bankFlowTable.refresh();
+            UtilFX.alertScreen(Alert.AlertType.INFORMATION, "Banka Hareketleri Başarı ile Güncellendi!", ButtonType.OK);
         }
         catch (EmptyFieldException e)
         {

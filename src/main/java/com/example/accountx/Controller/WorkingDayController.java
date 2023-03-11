@@ -9,11 +9,11 @@ import com.example.accountx.util.UtilFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import static com.example.accountx.util.Constant.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+
+import static com.example.accountx.util.Constant.*;
 public class WorkingDayController
 {
     @FXML
@@ -28,8 +28,6 @@ public class WorkingDayController
     private ListView<OffDay> costFormListView;
     @FXML
     private Label sumOfWorkingDay;
-
-
 
     @FXML
     private void initialize()

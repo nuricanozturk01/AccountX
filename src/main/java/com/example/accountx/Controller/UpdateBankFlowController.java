@@ -3,12 +3,18 @@ package com.example.accountx.Controller;
 import com.example.accountx.Entity.BankFlow;
 import com.example.accountx.Entity.CostType;
 import com.example.accountx.HibernateConfiguration.SessionFactoryManager;
+import com.example.accountx.command.commandcontroller.CommandController;
+import com.example.accountx.command.dto.BankFlowDTO;
 import com.example.accountx.util.StringControl;
 import com.example.accountx.util.UtilFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.math.BigDecimal;
+
+import static com.example.accountx.HibernateConfiguration.SessionFactoryManager.update;
+import static com.example.accountx.command.types.CommandName.BANK_FLOW;
+import static com.example.accountx.command.types.CommandType.UPDATE;
 
 public class UpdateBankFlowController
 {
@@ -21,10 +27,13 @@ public class UpdateBankFlowController
     private BankFlow existingBankFlow;
 
     @FXML
-    private void initialize() {
-        SessionFactoryManager.getCostTypes().forEach(costTypeChoiceBox.getItems()::add);
+    private void initialize()
+    {
+        costTypeChoiceBox.getItems().addAll(SessionFactoryManager.getCostTypes());
     }
-    private void setFields() {
+    private void setFields()
+    {
+        costTypeChoiceBox.getSelectionModel().select(SessionFactoryManager.getCostType(existingBankFlow.getCostType()));
         datePicker.setValue(existingBankFlow.getDate());
         billingNumberTextField.setText(existingBankFlow.getBillingNumber());
         descriptionText.setText(existingBankFlow.getCaseFlow());
@@ -55,6 +64,9 @@ public class UpdateBankFlowController
             if (!StringControl.isValid(billingNumber, description, amountString))
                 throw new Exception();
 
+
+            CommandController.getInstance().acceptUpdate(BANK_FLOW, new BankFlowDTO(existingBankFlow, UPDATE));
+
             var amount = new BigDecimal(amountString);
 
             existingBankFlow.setDate(date);
@@ -63,15 +75,12 @@ public class UpdateBankFlowController
             existingBankFlow.setBillingNumber(billingNumber);
             existingBankFlow.setCost(amount);
 
-            SessionFactoryManager.update(existingBankFlow);
+
+            update(existingBankFlow);
 
             controller.update(existingBankFlow);
 
-            //System.out.println("K: " + k.getCostType());
             UtilFX.alertScreen(Alert.AlertType.INFORMATION,"Banka Hareket Formu başarı ile güncellendi!", ButtonType.OK);
-
-
-            //controller.getService().initBankFlowTable();
         }
         catch (NumberFormatException numberFormatException) {
             UtilFX.alertScreen(Alert.AlertType.ERROR, "Lütfen geçerli bir sayı giriniz!", ButtonType.OK);
@@ -79,6 +88,7 @@ public class UpdateBankFlowController
         catch (Exception ex) {
             var msg = "Lütfen geçerli yazı giriniz... Cümle başı ve sonunda boşluk olamaz!";
             UtilFX.alertScreen(Alert.AlertType.ERROR, msg, ButtonType.OK);
+            System.out.println(ex.getMessage());
         }
     }
 }

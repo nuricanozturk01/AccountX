@@ -17,8 +17,20 @@ public class UpdateCostTypeController {
     private CostType existingCostType;
     private MainScreenController controller;
 
+    public void setExistingCostType(CostType type)
+    {
+        this.existingCostType = type;
+        costTypeTextField.setText(existingCostType.getCostType());
+    }
+
+    public void setController(MainScreenController mainScreenController)
+    {
+        this.controller = mainScreenController;
+    }
+
     @FXML
-    private void pressKey(KeyEvent keyEvent) {
+    private void pressKey(KeyEvent keyEvent)
+    {
         if (keyEvent.getCode() == KeyCode.ENTER)
             clickSaveButton();
     }
@@ -40,26 +52,11 @@ public class UpdateCostTypeController {
                controller.getService().initCostTypeTable();
                controller.getService().fillCostTypeChoiceBox();
            }
+
            else UtilFX.alertScreen(Alert.AlertType.INFORMATION, "Girdiğiniz Gider Türü Öncekiyle Aynı...", ButtonType.OK);
-           //throw new UnsupportedOperationException();
-
-
        }
-       /*catch (UnsupportedOperationException ex) {
-           UtilFX.alertScreen(Alert.AlertType.ERROR, "Bu Özellik Diğer sürümde Eklenecek...", ButtonType.OK);
-       }*/
        catch (EmptyFieldException ex) {
            UtilFX.alertScreen(Alert.AlertType.INFORMATION, "Lütfen Alanı Doldurunuz...", ButtonType.OK);
        }
-
-    }
-
-    public void setExistingCostType(CostType type) {
-        this.existingCostType = type;
-        costTypeTextField.setText(existingCostType.getCostType());
-    }
-
-    public void setController(MainScreenController mainScreenController) {
-        this.controller = mainScreenController;
     }
 }

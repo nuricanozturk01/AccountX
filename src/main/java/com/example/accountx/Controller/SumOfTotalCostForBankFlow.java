@@ -6,12 +6,13 @@ import com.example.accountx.HibernateConfiguration.SessionFactoryManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import static com.example.accountx.util.Constant.*;
-import static com.example.accountx.util.UtilFX.getFormattedNumber;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.IntStream;
+
+import static com.example.accountx.util.Constant.*;
+import static com.example.accountx.util.UtilFX.getFormattedNumber;
 
 public class SumOfTotalCostForBankFlow 
 {

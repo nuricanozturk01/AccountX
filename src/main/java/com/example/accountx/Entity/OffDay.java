@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import static com.example.accountx.util.Constant.*;
 @SuppressWarnings("all")
 @Table(name = "off_days")

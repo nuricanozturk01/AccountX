@@ -6,6 +6,13 @@ import com.example.accountx.Excel.ExportManagerReport;
 import com.example.accountx.Excel.ReadExcel;
 import com.example.accountx.HibernateConfiguration.SessionFactoryManager;
 import com.example.accountx.Service.MainScreenService;
+import com.example.accountx.command.commandcontroller.CommandController;
+import com.example.accountx.command.commands.CommandBankFlow;
+import com.example.accountx.command.commands.CommandCostForm;
+import com.example.accountx.command.commands.CommandMultipleBankFlow;
+import com.example.accountx.command.dto.BankFlowDTO;
+import com.example.accountx.command.dto.CostFormDTO;
+import com.example.accountx.command.dto.MultipleBankFlowDTO;
 import com.example.accountx.util.Constant;
 import com.example.accountx.util.UtilFX;
 import javafx.collections.FXCollections;
@@ -20,8 +27,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
+import static com.example.accountx.command.types.CommandName.*;
+import static com.example.accountx.command.types.CommandType.REMOVE;
 import static com.example.accountx.util.UtilFX.getFormattedNumber;
 
 public class MainScreenController
@@ -93,6 +103,7 @@ public class MainScreenController
     private MainScreenService service;
 
     private final TreeSet<BankFlow> markedBankFlowTreeSet = new TreeSet<>();
+
     @FXML
     private void initialize()
     {
@@ -116,6 +127,13 @@ public class MainScreenController
                 .build();
 
         service.init();
+
+        // UNDO OPERATIONS
+        var undoController = CommandController.getInstance();
+
+        undoController.addCommand(MULTIPLE_BANK_FLOW, new CommandMultipleBankFlow(this));
+        undoController.addCommand(COST_FORM, new CommandCostForm(this));
+        undoController.addCommand(BANK_FLOW, new CommandBankFlow(this));
     }
 
     public MainScreenService getService()
@@ -126,17 +144,31 @@ public class MainScreenController
     @FXML
     private void clickSelectAllBankFlows()
     {
-        bankFlowTable.getItems().forEach(item -> {
-            if (item.isMark()) {
+
+        if (selectAllRadioButton.isSelected())
+        {
+            bankFlowTable.getItems().forEach(item -> {
+                if (item.isMark()) {
+                    item.setMark(false);
+                    markedBankFlowTreeSet.remove(item);
+                }
+                else
+                {
+                    item.setMark(true);
+                    markedBankFlowTreeSet.add(item);
+                }
+            });
+            bankFlowTable.refresh();
+        }
+        else
+        {
+            bankFlowTable.getItems().forEach(item -> {
                 item.setMark(false);
                 markedBankFlowTreeSet.remove(item);
-            } else {
-                item.setMark(true);
-                markedBankFlowTreeSet.add(item);
-            }
+            });
+            bankFlowTable.refresh();
+        }
 
-        });
-        bankFlowTable.refresh();
     }
 
     /**
@@ -190,13 +222,12 @@ public class MainScreenController
         System.out.println(sb);
 
         var list = SessionFactoryManager.FilteredCostForms(sb.toString());
+
         if (list != null)
         {
             costFormTable.setItems(FXCollections.observableList(list));
             sumLabel.setText(getFormattedNumber(list.stream().map(CostForm::getTotalInvoice).reduce(BigDecimal.ZERO, BigDecimal::add)) + " ₺");
         }
-
-
     }
     @FXML
     private void clickFilter()
@@ -218,7 +249,7 @@ public class MainScreenController
         var startDate = startDatePicker.getValue();
 
         var finishDate = finishDatePicker.getValue();
-        var word = nameTextField.getText();System.out.println( "WORD is: " + word);
+        var word = nameTextField.getText();
 
         var type = costTypeChoiceBox.getSelectionModel().getSelectedItem();
 
@@ -240,7 +271,6 @@ public class MainScreenController
             sb.append("\' = "); sb.append("caseFlow) OR (LOCATE(\'");sb.append(lower);sb.append("\',");
             sb.append("caseFlow) > 0");
             sb.append(" OR "); sb.append("LOCATE(\'");sb.append(upper);sb.append("\',");sb.append("caseFlow) > 0))");
-
         }
 
         if (type != null)
@@ -251,56 +281,13 @@ public class MainScreenController
         }
         sb.append(";");
         var list = SessionFactoryManager.FilteredBankFlows(sb.toString());
+
         if (list != null)
         {
             bankFlowTable.setItems(FXCollections.observableList(list));
             sumLabel.setText(getFormattedNumber(list.stream().map(BankFlow::getCost).reduce(BigDecimal.ZERO, BigDecimal::add)) + " ₺");
         }
 
-        System.out.println(sb);
-    }
-    @Deprecated
-    private void filterSearchName()
-    {
-        var name = nameTextField.getText();
-
-        if (costFormTab.isSelected())
-        {
-
-            costFormTable.setItems(FXCollections.observableList(SessionFactoryManager.filterNameCostForms(name)));
-        }
-
-        if (userTab.isSelected())
-            UsersTable.setItems(FXCollections.observableList(SessionFactoryManager.filterNameUser(name)));
-
-        if (costTypeTab.isSelected())
-            costTypeTable.setItems(FXCollections.observableList(SessionFactoryManager.filterNameCostType(name)));
-
-        if (bankFlowTab.isSelected())
-            bankFlowTable.setItems(FXCollections.observableList(SessionFactoryManager.filterNameBankFlows(name)));
-    }
-    @Deprecated
-    private void filterByDate()
-    {
-        if (costFormTab.isSelected())
-            costFormTable.setItems(FXCollections.observableList
-                    (SessionFactoryManager.filterDateCostForms(startDatePicker.getValue(), finishDatePicker.getValue())));
-
-        if (bankFlowTab.isSelected())
-            bankFlowTable.setItems(FXCollections.observableList
-                    (SessionFactoryManager.filterDateBankFlows(startDatePicker.getValue(), finishDatePicker.getValue())));
-    }
-    @Deprecated
-    private void clickFilterCostType()
-    {
-        var filterType = costTypeChoiceBox.getSelectionModel().getSelectedItem();
-
-
-        if (costFormTab.isSelected())
-            costFormTable.setItems(FXCollections.observableList(SessionFactoryManager.filterCostTypeCostFlows(filterType.getCostType())));
-
-        if (bankFlowTab.isSelected())
-            bankFlowTable.setItems(FXCollections.observableList(SessionFactoryManager.filterCostTypeBankFlows(filterType.getCostType())));
     }
     @FXML
     private void resetTableButton()
@@ -315,6 +302,8 @@ public class MainScreenController
         costTypeChoiceBox.setValue(null);
         userChoiceBox.setValue(null);
         selectAllRadioButton.setSelected(false);
+        bankFlowTable.getItems().forEach(item -> item.setMark(false));
+        markedBankFlowTreeSet.clear();
         sumLabel.setText("N/A");
     }
 
@@ -507,6 +496,8 @@ public class MainScreenController
         SessionFactoryManager.update(item.getUser());
         costFormTable.refresh();
         costFormTable.getItems().remove(item);
+
+        CommandController.getInstance().acceptRemove(COST_FORM, new CostFormDTO(item, REMOVE));
     }
     @FXML
     private void clickUpdateCostFlow()
@@ -553,8 +544,11 @@ public class MainScreenController
     {
         var item = bankFlowTable.getSelectionModel().getSelectedItem();
         SessionFactoryManager.remove(item);
-        bankFlowTable.refresh();
+
         bankFlowTable.getItems().remove(item);
+        bankFlowTable.refresh();
+
+        CommandController.getInstance().acceptRemove(BANK_FLOW, new BankFlowDTO(item, REMOVE));
     }
 
     public void update(BankFlow existingBankFlow)
@@ -591,7 +585,17 @@ public class MainScreenController
         UtilFX.initStage("Yönetici Özeti Girdi Ekleme Formu", new Stage(), new Scene(loader.load()), false, Constant.ICON);
     }
 
-
+    @FXML
+    private void clickDeleteMarkedBankFlows()
+    {
+        var list = new ArrayList<BankFlow>(markedBankFlowTreeSet);
+        list.forEach(f -> f.setMark(false));
+        list.forEach(SessionFactoryManager::remove);
+        CommandController.getInstance().acceptRemove(MULTIPLE_BANK_FLOW, new MultipleBankFlowDTO(list, REMOVE));
+        UtilFX.alertScreen(Alert.AlertType.INFORMATION, "Banka Hareketrleri Başarı ile Silindi...",
+                ButtonType.OK);
+        service.initCostFlowTable();
+    }
     @FXML
     private void clickDeleteMultipleBankFlow() throws IOException
     {
@@ -601,7 +605,7 @@ public class MainScreenController
     }
 
     @FXML
-    private void clickDeleteCostType() throws IOException
+    private void clickDeleteCostType()
     {
         var selectedItem = costTypeTable.getSelectionModel().getSelectedItem();
 
@@ -616,15 +620,8 @@ public class MainScreenController
             UtilFX.alertScreen(Alert.AlertType.INFORMATION, "Gider Türü başarı ile silindi...", ButtonType.OK);
         }
 
-        else UtilFX.alertScreen(Alert.AlertType.ERROR, "Gider Türü Silinemez! Gider Türünü İçeren Kayıtlar Mevcut", ButtonType.OK);
-    }
-
-    @FXML
-    private void clickDeleteMultipleCostForm() throws IOException
-    {
-        var loader = new FXMLLoader(App.class.getResource("toplu_masraf_form_silme_formu.fxml"));
-
-        UtilFX.initStage("Toplu Banka Hareketi Silme", new Stage(), new Scene(loader.load()), false, Constant.ICON);
+        else
+            UtilFX.alertScreen(Alert.AlertType.ERROR, "Gider Türü Silinemez! Gider Türünü İçeren Kayıtlar Mevcut", ButtonType.OK);
     }
 
     @FXML
@@ -651,6 +648,25 @@ public class MainScreenController
         controller.setBankFlows(markedBankFlowTreeSet);
     }
 
+    @FXML
+    private void clickUndoCostForm()
+    {
+        CommandController.getInstance().acceptUndo(COST_FORM);
+        costFormTable.refresh();
+    }
+    @FXML
+    private void clickUndoBankFlow()
+    {
+        CommandController.getInstance().acceptUndo(BANK_FLOW);
+        bankFlowTable.refresh();
+    }
+
+    @FXML
+    private void clickUndoMultipleBankFlow()
+    {
+        CommandController.getInstance().acceptUndo(MULTIPLE_BANK_FLOW);
+        bankFlowTable.refresh();
+    }
 
     @FXML
     private void clickExportReport()
@@ -711,5 +727,4 @@ public class MainScreenController
 
         UtilFX.initStage("Kişi - Yıl Avans", new Stage(), new Scene(loader.load()), false, Constant.ICON);
     }
-
 }

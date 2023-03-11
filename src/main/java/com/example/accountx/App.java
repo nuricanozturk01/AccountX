@@ -16,7 +16,7 @@ public class App extends Application
         var fxmlLoader = new FXMLLoader(App.class.getResource("preloader.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.sizeToScene();
-        UtilFX.initStage("Yedi İklim",stage,new Scene(fxmlLoader.load()),false, Constant.ICON);
+        UtilFX.initStage("AccountX",stage,new Scene(fxmlLoader.load()),false, Constant.ICON);
     }
     public static void run(String[] args)
     {

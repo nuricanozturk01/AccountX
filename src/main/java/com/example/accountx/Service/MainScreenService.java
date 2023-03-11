@@ -1,14 +1,18 @@
 package com.example.accountx.Service;
+
 import com.example.accountx.Entity.*;
 import com.example.accountx.HibernateConfiguration.SessionFactoryManager;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import static com.example.accountx.util.UtilFX.getFormattedNumber;
 import java.time.format.DateTimeFormatter;
+
+import static com.example.accountx.command.types.CommandName.*;
+import static com.example.accountx.util.UtilFX.getFormattedNumber;
 
 public class MainScreenService
 {
@@ -40,6 +44,8 @@ public class MainScreenService
     private ChoiceBox<User> userChoiceBox;
     private RadioButton selectAllRadioButton;
     private TableColumn<User, BigDecimal> advanceAmountTableColumn;
+
+
 
     public static class ServiceBuilder
     {
@@ -206,6 +212,7 @@ public class MainScreenService
         costColumn.setCellValueFactory(new PropertyValueFactory<>("TotalInvoice"));
         costColumn.setCellFactory((column) -> getFormattedTotalInvoice());
         voucherTableColumn.setCellValueFactory(new PropertyValueFactory<>("IsVoucher"));
+        voucherTableColumn.setCellFactory((column) -> getVoucherStatus());
         //BankFlow Table
         idColumnBankFlow.setCellValueFactory(new PropertyValueFactory<>("Bank_flow_pk_id"));
         dateColumnBank.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -227,7 +234,7 @@ public class MainScreenService
         // TabPane Listener method reference
         tabPane.getSelectionModel().selectedItemProperty().addListener(this::tabPaneListener);
 
-        SessionFactoryManager.getUserList().forEach(userChoiceBox.getItems()::add);
+        updateUserChoiceBox();
 
         fillCostTypeChoiceBox();
         fillTable();
@@ -235,6 +242,24 @@ public class MainScreenService
         dateColumnBank.setSortType(TableColumn.SortType.DESCENDING);
         bankFlowTable.getSortOrder().add(dateColumnBank);
 
+
+    }
+
+    public void updateUserChoiceBox()
+    {
+        userChoiceBox.getItems().clear();
+        SessionFactoryManager.getUserList().forEach(userChoiceBox.getItems()::add);
+    }
+    private TableCell<CostForm, Boolean> getVoucherStatus()
+    {
+        return new TableCell<>(){
+            @Override
+            protected void updateItem(Boolean item, boolean empty)
+            {
+                super.updateItem(item, empty);
+                setText(empty ? null : item ? "Var" : "Yok");
+            }
+        };
     }
 
     private TableCell<User, BigDecimal> getFormattedAdvanceAmountColumnUser()
@@ -346,6 +371,8 @@ public class MainScreenService
         };
     }
 
+
+
     /**
      * Getter Tables
      */
@@ -390,16 +417,18 @@ public class MainScreenService
         if (costTypeList != null && !costTypeList.isEmpty())
             costTypeTable.setItems(FXCollections.observableArrayList(costTypeList));
     }
-
     public void initBankFlowTable()
     {
-        var bankFlowList = SessionFactoryManager.getBankFlows();
+        bankFlowTable.getItems().clear();
 
-        if (bankFlowList != null && !bankFlowList.isEmpty())
-            bankFlowTable.setItems(FXCollections.observableArrayList(bankFlowList));
+        var bankFlows = SessionFactoryManager.getBankFlows();
+
+        if (bankFlows != null && !bankFlows.isEmpty())
+            bankFlowTable.setItems(FXCollections.observableArrayList(bankFlows));
+
+        bankFlowTable.refresh();
+
     }
-
-
     public void fillTable()
     {
         initCostFlowTable();
@@ -428,5 +457,8 @@ public class MainScreenService
     {
         initCostFlowTable();
     }
-
+    public void removeItemFromCostFormTable(CostForm cf)
+    {
+        costFlowTable.getItems().remove(cf);
+    }
 }

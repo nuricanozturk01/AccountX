@@ -20,8 +20,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.TreeSet;
 
 @SuppressWarnings("all")
 public class SessionFactoryManager
@@ -60,7 +61,7 @@ public class SessionFactoryManager
 
     public static Session getSession()
     {
-        return factory.getCurrentSession();
+        return factory.openSession();
     }
 
 
@@ -137,10 +138,6 @@ public class SessionFactoryManager
         }
     }
 
-
-
-
-
     public static AdvanceAmount getAdvanceAmountByUserByDate(int user_pk_id, int year, int month, int day)
     {
         Session session = getSession();
@@ -189,93 +186,7 @@ public class SessionFactoryManager
             session.close();
         }
     }
-    public static List<BankFlow> filterCostTypeBankFlows(String type)
-    {
-        Session session = getSession();
 
-        try {
-            session.beginTransaction();
-
-            Query<BankFlow> bankFlows = session.createSQLQuery("CALL filterByCostTypeBankFlow(:str);")
-                    .addEntity(BankFlow.class)
-                    .setParameter("str", type);
-
-            return bankFlows.getResultList();
-        }
-        finally {
-            session.close();
-        }
-    }
-
-    @SuppressWarnings("all")
-    public static List<CostForm> filterCostTypeCostFlows(String type)
-    {
-        Session session = getSession();
-
-        try {
-            session.beginTransaction();
-
-            Query<CostForm> costForms = session.createSQLQuery("CALL filterByCostTypeCostForm(:str);")
-                    .addEntity(CostForm.class)
-                    .setParameter("str", type);
-
-            return costForms.getResultList();
-        }
-        finally {
-            session.close();
-        }
-    }
-    public static List<CostForm> filterCostTypeCostFormsExactMatch(String type)
-    {
-        Session session = getSession();
-
-        try {
-            session.beginTransaction();
-
-            Query<CostForm> costForms = session.createSQLQuery("CALL filterByNameCostTypeExactMatch(:str);")
-                    .addEntity(CostForm.class)
-                    .setParameter("str", type);
-
-            return costForms.getResultList();
-        }
-        finally {
-            session.close();
-        }
-    }
-    public static List<CostForm> filterNameCostForms(String type)
-    {
-        Session session = getSession();
-
-        try {
-            session.beginTransaction();
-
-            Query<CostForm> costFlows = session.createSQLQuery("CALL filterByNameCostForm(:str);")
-                    .addEntity(CostForm.class)
-                    .setParameter("str", type);
-
-            return costFlows.getResultList();
-        }
-        finally {
-            session.close();
-        }
-    }
-    public static List<BankFlow> filterNameBankFlows(String type)
-    {
-        Session session = getSession();
-
-        try {
-            session.beginTransaction();
-
-            Query<BankFlow> bankFlows = session.createSQLQuery("CALL filterByNameBankFlow(:str);")
-                    .addEntity(BankFlow.class)
-                    .setParameter("str", type);
-
-            return bankFlows.getResultList();
-        }
-        finally {
-            session.close();
-        }
-    }
     public static List<User> filterNameUser(String type)
     {
         Session session = getSession();
@@ -310,7 +221,8 @@ public class SessionFactoryManager
             session.close();
         }
     }
-    public static <T> void addAll(List<T> objects) {
+    public static <T> void addAll(List<T> objects)
+    {
         var session = getSession();
         session.beginTransaction();
         objects.forEach(session::save);
@@ -318,30 +230,65 @@ public class SessionFactoryManager
         session.close();
     }
 
-    public static <T> void updateAll(TreeSet<T> objects) {
+    public static <T> void addAll(Collection<T> objects)
+    {
+        addAll(new ArrayList<T>(objects));
+    }
+
+    public static <T> void removeAll(List<T> objects)
+    {
+        var session = getSession();
+        session.beginTransaction();
+        objects.forEach(session::remove);
+        session.getTransaction().commit();
+        session.close();
+    }
+    public static <T> void removeAll(Collection<T> objects)
+    {
+        removeAll(new ArrayList<T>(objects));
+    }
+
+    public static <T> void updateAll(List<T> objects)
+    {
         var session = getSession();
         session.beginTransaction();
         objects.forEach(session::update);
         session.getTransaction().commit();
         session.close();
     }
-    public static void add(Object obj)
+
+    public static <T> void updateAll(Collection<T> objects)
+    {
+        var session = getSession();
+        session.beginTransaction();
+        objects.forEach(session::update);
+        session.getTransaction().commit();
+        session.close();
+    }
+    public static void  add(Object obj)
     {
         Session session = getSession();
         session.beginTransaction();
-        session.persist(obj);
+        session.save(obj);
         session.getTransaction().commit();
         session.close();
     }
 
-    public static void addSaveOrUpdate(Object obj)
+
+    /*public static Object getLastCostForm(Class<?> cls)
     {
         Session session = getSession();
-        session.beginTransaction();
-        session.saveOrUpdate(obj);
-        session.getTransaction().commit();
-        session.close();
-    }
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("FROM CostForm ORDER BY cost_form_pk_id DESC");
+            query.setMaxResults(1);
+
+            return (CostForm) query.uniqueResult();
+        }
+        finally {
+            session.close();
+        }
+    }*/
 
     public static<T> T get(Class<T> var, Serializable serializable)
     {
@@ -371,6 +318,21 @@ public class SessionFactoryManager
         }
     }
 
+    public static BankFlow getBankFlow()
+    {
+        Session session = getSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("FROM BankFlow ORDER BY bank_flow_pk_id DESC");
+            query.setMaxResults(1);
+
+            return (BankFlow) query.uniqueResult();
+        }
+        finally {
+            session.close();
+        }
+    }
+
     public static List<User> getUserList()
     {
         Session session = getSession();
@@ -389,7 +351,7 @@ public class SessionFactoryManager
         Session session = getSession();
         try {
             session.beginTransaction();
-            session.saveOrUpdate(obj);
+            session.update(obj);
             session.getTransaction().commit();
         }
         finally {
@@ -408,20 +370,7 @@ public class SessionFactoryManager
             session.close();
         }
     }
-    public static List<Integer> getDistinctYears(int id)
-    {
-        Session session = getSession();
-        try {
-            session.beginTransaction();
 
-            Query<Integer> years = session.createSQLQuery("CALL getYearByUser(:id);").setParameter("id", id);
-
-            return years.getResultList();
-        }
-        finally {
-            session.close();
-        }
-    }
 
     public static BigDecimal getSumOfCostForm(Integer year, int id)
     {
@@ -593,24 +542,6 @@ public class SessionFactoryManager
             session.close();
         }
     }
-    public static BigDecimal getSumOfTypesBankFlow(String type, int month) {
-        Session session = getSession();
-        try {
-            session.beginTransaction();
-
-            Query<BigDecimal> sum = session.createSQLQuery("CALL getSumOfTypesBankFlowWithMonth(:type, :month);")
-                    .setParameter("type", type)
-                    .setParameter("month", month);
-
-            return sum.getSingleResult();
-        }
-        catch (NoResultException ignored) {
-            return null;
-        }
-        finally {
-            session.close();
-        }
-    }
 
     public static BigDecimal getSumOfTypesBankFlow(String type, int year, int month) {
         Session session = getSession();
@@ -669,19 +600,23 @@ public class SessionFactoryManager
         }
     }
 
-    public static List<CostForm> getCostFormList(int max)
+    public static List<CostForm> getCostFormList(LocalDate start, LocalDate end)
     {
         Session session = getSession();
         try {
             session.beginTransaction();
-            Query<CostForm> costForms = session.createSQLQuery("SELECT * FROM cost_form LIMIT :lim")
+            Query<CostForm> costForms = session.createSQLQuery("select * from cost_form where date between :st AND :en")
                     .addEntity(CostForm.class)
-                    .setParameter("lim", max);
+                    .setParameter("st", start)
+                    .setParameter("en", end);
+
             return costForms.getResultList();
         }finally {
             session.close();
         }
     }
+
+
 
     public static List<OffDay> getOffDaysByYearAndUser(int user_pk_id, int year)
     {
@@ -829,9 +764,12 @@ public class SessionFactoryManager
         }
     }
 
-    public static CostType getCostType(String costType) {
+    public static CostType getCostType(String costType)
+    {
         Session session = getSession();
-        try {
+
+        try
+        {
             session.beginTransaction();
 
             Query<CostType> query = session.createSQLQuery("CALL getCostType(:type);")
@@ -840,10 +778,12 @@ public class SessionFactoryManager
 
             return query.getSingleResult();
         }
-        catch (NoResultException ignored) {
+        catch (NoResultException ignored)
+        {
             return null;
         }
-        finally {
+        finally
+        {
             session.close();
         }
     }
@@ -852,12 +792,14 @@ public class SessionFactoryManager
     {
         var session = getSession();
 
-        try {
+        try
+        {
             session.beginTransaction();
             session.delete(existingValue);
             session.getTransaction().commit();
         }
-        finally {
+        finally
+        {
             session.close();
         }
     }
@@ -869,7 +811,7 @@ public class SessionFactoryManager
         try
         {
             session.beginTransaction();
-            session.delete(item);
+            session.remove(item);
             session.getTransaction().commit();
         }
         finally
@@ -880,20 +822,22 @@ public class SessionFactoryManager
 
     public static List<BankFlow> FilteredBankFlows(String queryStr)
     {
-
         Session session = getSession();
-        try {
-            session.beginTransaction();
 
+        try
+        {
+            session.beginTransaction();
 
             Query<BankFlow> query = session.createSQLQuery(queryStr).addEntity(BankFlow.class);
 
             return query.getResultList();
         }
-        catch (NoResultException ignored) {
+        catch (NoResultException ignored)
+        {
             return null;
         }
-        finally {
+        finally
+        {
             session.close();
         }
     }
@@ -917,22 +861,6 @@ public class SessionFactoryManager
         }
     }
 
-
-    // Add many bank flows
-    private void addBankFlows(List<BankFlow> bankFlows)
-    {
-        Session session = getSession();
-        try
-        {
-            session.beginTransaction();
-            bankFlows.forEach(session::saveOrUpdate);
-            session.getTransaction().commit();
-        }
-        finally
-        {
-            session.close();
-        }
-    }
     public static List<CostType> getCostTypes()
     {
         Session session = getSession();
@@ -958,7 +886,40 @@ public class SessionFactoryManager
         }
     }
 
-    public static List<BankFlow> getBankFlows(int max)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------------------------------------
+    /*public static List<BankFlow> getBankFlows(int max)
     {
         Session session = getSession();
         try {
@@ -971,5 +932,175 @@ public class SessionFactoryManager
         finally {
             session.close();
         }
+    }*/
+
+
+
+    // Add many bank flows
+    /*private void addBankFlows(List<BankFlow> bankFlows)
+    {
+        Session session = getSession();
+        try
+        {
+            session.beginTransaction();
+            bankFlows.forEach(session::saveOrUpdate);
+            session.getTransaction().commit();
+        }
+        finally
+        {
+            session.close();
+        }
+    }*/
+
+
+
+     /*public static List<CostForm> getCostFormList(int max)
+    {
+        Session session = getSession();
+        try {
+            session.beginTransaction();
+            Query<CostForm> costForms = session.createSQLQuery("SELECT * FROM cost_form LIMIT :lim")
+                    .addEntity(CostForm.class)
+                    .setParameter("lim", max);
+            return costForms.getResultList();
+        }finally {
+            session.close();
+        }
+    }*/
+
+        /*public static BigDecimal getSumOfTypesBankFlow(String type, int month) {
+        Session session = getSession();
+        try {
+            session.beginTransaction();
+
+            Query<BigDecimal> sum = session.createSQLQuery("CALL getSumOfTypesBankFlowWithMonth(:type, :month);")
+                    .setParameter("type", type)
+                    .setParameter("month", month);
+
+            return sum.getSingleResult();
+        }
+        catch (NoResultException ignored) {
+            return null;
+        }
+        finally {
+            session.close();
+        }
+    }*/
+
+
+    /* public static List<Integer> getDistinctYears(int id)
+    {
+        Session session = getSession();
+        try {
+            session.beginTransaction();
+
+            Query<Integer> years = session.createSQLQuery("CALL getYearByUser(:id);").setParameter("id", id);
+
+            return years.getResultList();
+        }
+        finally {
+            session.close();
+        }
+    }*/
+
+
+        /*public static void addSaveOrUpdate(Object obj)
+    {
+        Session session = getSession();
+        session.beginTransaction();
+        session.saveOrUpdate(obj);
+        session.getTransaction().commit();
+        session.close();
+    }*/
+
+
+    /*public static List<CostForm> filterCostTypeCostFormsExactMatch(String type)
+    {
+        Session session = getSession();
+
+        try {
+            session.beginTransaction();
+
+            Query<CostForm> costForms = session.createSQLQuery("CALL filterByNameCostTypeExactMatch(:str);")
+                    .addEntity(CostForm.class)
+                    .setParameter("str", type);
+
+            return costForms.getResultList();
+        }
+        finally {
+            session.close();
+        }
     }
+    public static List<CostForm> filterNameCostForms(String type)
+    {
+        Session session = getSession();
+
+        try {
+            session.beginTransaction();
+
+            Query<CostForm> costFlows = session.createSQLQuery("CALL filterByNameCostForm(:str);")
+                    .addEntity(CostForm.class)
+                    .setParameter("str", type);
+
+            return costFlows.getResultList();
+        }
+        finally {
+            session.close();
+        }
+    }
+    public static List<BankFlow> filterNameBankFlows(String type)
+    {
+        Session session = getSession();
+
+        try {
+            session.beginTransaction();
+
+            Query<BankFlow> bankFlows = session.createSQLQuery("CALL filterByNameBankFlow(:str);")
+                    .addEntity(BankFlow.class)
+                    .setParameter("str", type);
+
+            return bankFlows.getResultList();
+        }
+        finally {
+            session.close();
+        }
+    }*/
+
+    /*public static List<BankFlow> filterCostTypeBankFlows(String type)
+    {
+        Session session = getSession();
+
+        try {
+            session.beginTransaction();
+
+            Query<BankFlow> bankFlows = session.createSQLQuery("CALL filterByCostTypeBankFlow(:str);")
+                    .addEntity(BankFlow.class)
+                    .setParameter("str", type);
+
+            return bankFlows.getResultList();
+        }
+        finally {
+            session.close();
+        }
+    }*/
+
+    /*@SuppressWarnings("all")
+    public static List<CostForm> filterCostTypeCostFlows(String type)
+    {
+        Session session = getSession();
+
+        try {
+            session.beginTransaction();
+
+            Query<CostForm> costForms = session.createSQLQuery("CALL filterByCostTypeCostForm(:str);")
+                    .addEntity(CostForm.class)
+                    .setParameter("str", type);
+
+            return costForms.getResultList();
+        }
+        finally {
+            session.close();
+        }
+    }*/
+
 }

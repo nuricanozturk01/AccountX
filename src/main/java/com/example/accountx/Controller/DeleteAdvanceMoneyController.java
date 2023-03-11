@@ -9,12 +9,13 @@ import javafx.scene.control.*;
 
 import java.time.LocalDate;
 
+import static com.example.accountx.HibernateConfiguration.SessionFactoryManager.*;
+
 public class DeleteAdvanceMoneyController
 {
     @FXML private ChoiceBox<User> personChoiceBox;
     @FXML private DatePicker datePicker;
     @FXML private TextField existingAmountTextField;
-
     private AdvanceAmount existingValue;
 
     @FXML
@@ -23,12 +24,11 @@ public class DeleteAdvanceMoneyController
         SessionFactoryManager.getUserList().forEach(personChoiceBox.getItems()::add);
         datePicker.setValue(LocalDate.now());
     }
-
     @FXML
     private void clickGet()
     {
         var user = personChoiceBox.getSelectionModel().getSelectedItem();
-        var amount = SessionFactoryManager.getAdvanceAmountByUserByDate(user.getUser_pk_id(), datePicker.getValue().getYear(),
+        var amount = getAdvanceAmountByUserByDate(user.getUser_pk_id(), datePicker.getValue().getYear(),
                 datePicker.getValue().getMonthValue(), datePicker.getValue().getDayOfMonth());
         if (amount != null)
         {
@@ -36,16 +36,17 @@ public class DeleteAdvanceMoneyController
             existingAmountTextField.setText(amount.getAmount() + " ₺");
         }
         else existingAmountTextField.setText("Avans Miktarı Bulunamadı....");
-
     }
-
 
     @FXML
     private void clickDelete()
     {
         if (existingValue != null)
         {
-            SessionFactoryManager.delete(existingValue);
+            var user = personChoiceBox.getSelectionModel().getSelectedItem();
+            user.setAmount(user.getAmount().subtract(existingValue.getAmount()));
+            update(user);
+            delete(existingValue);
             UtilFX.alertScreen(Alert.AlertType.INFORMATION, "Avans miktarı başarı ile güncellendi!...", ButtonType.OK);
         }
     }

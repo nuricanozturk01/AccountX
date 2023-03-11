@@ -2,7 +2,6 @@ package com.example.accountx.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,7 +12,7 @@ import static com.example.accountx.util.UtilFX.getFormattedNumber;
 @SuppressWarnings("all")
 @Entity
 @Table(name = "user")
-public class User
+public class User implements Cloneable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,5 +53,12 @@ public class User
         sb.append(surname); sb.append(DELIMITER);
         sb.append(getFormattedNumber(amount)); sb.append(DELIMITER);
         return sb.toString();
+    }
+
+    public User clone()
+    {
+        var usr = new User(name, surname, amount);
+        usr.user_pk_id = user_pk_id;
+        return usr;
     }
 }

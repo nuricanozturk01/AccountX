@@ -1,4 +1,5 @@
 package com.example.accountx.Entity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +16,10 @@ import static com.example.accountx.util.UtilFX.getFormattedNumber;
 @Table(name = "Cost_form")
 @Getter
 @Setter
-public class CostForm
+public class CostForm implements Cloneable
 {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cost_form_pk_id")
@@ -124,6 +127,27 @@ public class CostForm
 
     public boolean getIsVoucher() {
         return isVoucher;
+    }
+
+    public CostForm clone()
+    {
+        var cf =  new Builder()
+                .setCompany(company)
+                .setBillingNumber(billingNumber)
+                .setCostType(costType)
+                .setDate(date)
+                .setExpenditureOfficer(expenditureOfficer)
+                .setKDV(kdv)
+                .setInvoiceAmount(invoiceAmount)
+                .setIsVoucher(isVoucher)
+                .setTime(time)
+                .setTDescription(description)
+                .setUser(user)
+                .setTotalInvoice(totalInvoice)
+                .build();
+        cf.cost_form_pk_id = cost_form_pk_id;
+        return cf;
+
     }
     public String generateExcelFormat()
     {

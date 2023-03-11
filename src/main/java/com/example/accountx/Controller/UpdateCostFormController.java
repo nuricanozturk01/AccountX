@@ -4,6 +4,8 @@ import com.example.accountx.Entity.CostForm;
 import com.example.accountx.Entity.CostType;
 import com.example.accountx.Entity.User;
 import com.example.accountx.HibernateConfiguration.SessionFactoryManager;
+import com.example.accountx.command.commandcontroller.CommandController;
+import com.example.accountx.command.dto.CostFormDTO;
 import com.example.accountx.util.UtilFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,6 +14,9 @@ import javafx.scene.input.KeyEvent;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import static com.example.accountx.command.types.CommandName.COST_FORM;
+import static com.example.accountx.command.types.CommandType.UPDATE;
 
 public class UpdateCostFormController
 {
@@ -54,6 +59,7 @@ public class UpdateCostFormController
 
     public void setExistingCostForm(CostForm existingCostForm) {
         this.existingCostForm = existingCostForm;
+
         setTexts();
         initChoiceBoxes();
     }
@@ -99,13 +105,21 @@ public class UpdateCostFormController
         totalInvoice = total;
         invoiceAmount = new BigDecimal(getKDV(kdv));
 
-        updateCostForm();
+        System.out.println("CT: " + existingCostForm.getCostType());
+        var beforeCostForm = existingCostForm.clone();
+
+        if (existingCostForm.getUser().getUser_pk_id() == officerChoice.getSelectionModel().getSelectedItem().getUser_pk_id())
+            CommandController.getInstance().acceptUpdate(COST_FORM, new CostFormDTO(existingCostForm, UPDATE)); // FOR UNDO
+
+        updateCostForm(beforeCostForm);
         UtilFX.alertScreen(Alert.AlertType.INFORMATION,"Masraf Formu Başarıyla Güncellendi!", ButtonType.OK);
     }
-    private void updateCostForm()
+    private void updateCostForm(CostForm beforeCostForm)
     {
         if (costType.getCostType() == null)
             UtilFX.alertScreen(Alert.AlertType.ERROR, "Lütfen Gider Türünü Girin...", ButtonType.OK);
+
+        var oldAmount = existingCostForm.getTotalInvoice();
 
         var user = officerChoice.getSelectionModel().getSelectedItem();
         existingCostForm.setUser(user);
@@ -120,7 +134,18 @@ public class UpdateCostFormController
         existingCostForm.setInvoiceAmount(invoiceAmount);
         existingCostForm.setKdv(kdv);
 
+        if (beforeCostForm.getUser().getUser_pk_id() != existingCostForm.getUser().getUser_pk_id())
+        {
+            beforeCostForm.getUser().setAmount(beforeCostForm.getUser().getAmount().subtract(beforeCostForm.getTotalInvoice()));
+            SessionFactoryManager.update(beforeCostForm.getUser());
+            user.setAmount(existingCostForm.getInvoiceAmount().add(user.getAmount()));
+            UtilFX.alertScreen(Alert.AlertType.WARNING, "Kişiyi güncellediğiniz için Geri alma işleminde kullanılamaz...", ButtonType.OK);
+        }
+        else
+            user.setAmount(existingCostForm.getUser().getAmount().subtract(oldAmount).add(totalInvoice));
+
         SessionFactoryManager.update(existingCostForm);
+        SessionFactoryManager.update(user);
 
         mainScreenController.update(existingCostForm);
     }

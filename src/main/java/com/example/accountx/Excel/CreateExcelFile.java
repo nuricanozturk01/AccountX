@@ -22,6 +22,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class CreateExcelFile
 {
+    private final static String DELIMITER = "/";
     private String fileName;
     private final String EXTENSION = ".xlsx";
     protected XSSFWorkbook workbook;
@@ -147,7 +148,7 @@ public class CreateExcelFile
 
     protected void saveFile()
     {
-        try (FileOutputStream os = new FileOutputStream( path + "\\" + fileName)) {
+        try (FileOutputStream os = new FileOutputStream( path + DELIMITER + fileName)) {
             workbook.write(os);
             os.close();
             workbook.close();
@@ -166,7 +167,7 @@ public class CreateExcelFile
         try
         {
             workbook = new XSSFWorkbook();
-            var fos = new FileOutputStream(new File(path + "\\" + fileName));
+            var fos = new FileOutputStream(new File(path + DELIMITER + fileName));
             sheet = workbook.createSheet("sayfa-1");
             workbook.write(fos);
             fos.close();

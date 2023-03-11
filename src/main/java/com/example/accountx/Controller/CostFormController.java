@@ -2,6 +2,8 @@ package com.example.accountx.Controller;
 
 import com.example.accountx.Entity.*;
 import com.example.accountx.HibernateConfiguration.SessionFactoryManager;
+import com.example.accountx.command.commandcontroller.CommandController;
+import com.example.accountx.command.dto.CostFormDTO;
 import com.example.accountx.util.StringControl;
 import com.example.accountx.util.UtilFX;
 import javafx.fxml.FXML;
@@ -12,6 +14,9 @@ import javafx.scene.input.KeyEvent;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import static com.example.accountx.command.types.CommandName.COST_FORM;
+import static com.example.accountx.command.types.CommandType.APPLY;
 
 public class CostFormController
 {
@@ -119,6 +124,8 @@ public class CostFormController
                     .build();
 
             SessionFactoryManager.add(form);
+
+            CommandController.getInstance().acceptApply(COST_FORM, new CostFormDTO(form, APPLY)); // FOR UNDO
 
             var costForm = (CostForm) SessionFactoryManager.getCostForm();
 

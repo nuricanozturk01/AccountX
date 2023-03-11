@@ -2,6 +2,7 @@ package com.example.accountx.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ import static com.example.accountx.util.UtilFX.getFormattedNumber;
 @Table(name = "Bank_flow")
 @Getter
 @Setter
-public class BankFlow implements Comparable<BankFlow>
+public class BankFlow implements Comparable<BankFlow>, Cloneable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,7 +86,7 @@ public class BankFlow implements Comparable<BankFlow>
 
         return -1;
     }
-    public String generateExcelFormat()
+    public String generateExcelFormat() // For TreeSet
     {
         var sb = new StringBuilder();
         sb.append(date.format(DATE_TIME_FORMATTER)); sb.append(DELIMITER);
@@ -94,5 +95,16 @@ public class BankFlow implements Comparable<BankFlow>
         sb.append(costType); sb.append(DELIMITER);
         sb.append(getFormattedNumber(cost)); sb.append(DELIMITER);
         return sb.toString();
+    }
+
+    public BankFlow clone()
+    {
+        var bf = new BankFlow(date, time, caseFlow, costType, cost, billingNumber);
+        bf.bank_flow_pk_id = bank_flow_pk_id;
+        return bf;
+    }
+    public BankFlow cloneWithoutPK()
+    {
+        return new BankFlow(date, time, caseFlow, costType, cost, billingNumber);
     }
 }

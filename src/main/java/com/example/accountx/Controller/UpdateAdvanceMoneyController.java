@@ -46,9 +46,12 @@ public class UpdateAdvanceMoneyController
     {
         try
         {
+            var user = personChoiceBox.getSelectionModel().getSelectedItem();
             var newAmount = new BigDecimal(newAmountTextField.getText());
+            user.setAmount(newAmount.subtract(existingValue.getAmount()).add(user.getAmount()));
             existingValue.setAmount(newAmount);
             SessionFactoryManager.update(existingValue);
+            SessionFactoryManager.update(user);
             UtilFX.alertScreen(Alert.AlertType.INFORMATION, "Avans miktarı başarı ile güncellendi!...", ButtonType.OK);
         }
         catch (NumberFormatException ex)

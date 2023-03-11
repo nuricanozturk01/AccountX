@@ -6,8 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import static com.example.accountx.util.UtilFX.getFormattedNumber;
+
 import static com.example.accountx.util.Constant.*;
+import static com.example.accountx.util.UtilFX.getFormattedNumber;
 @SuppressWarnings("all")
 @Entity
 @Table(name = "other_flow")

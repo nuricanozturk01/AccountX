@@ -10,8 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.math.BigDecimal;
+
 public class UpdatePersonController
 {
+    @FXML
+    private TextField advanceAmountTextField;
     private MainScreenController mainScreenController;
     @FXML
     private TextField nameTextField;
@@ -34,6 +38,8 @@ public class UpdatePersonController
            nameTextField.setText(user.getName());
 
            surnameTextField.setText(user.getSurname());
+
+           advanceAmountTextField.setText(user.getAmount().toString());
        }
        catch (Exception ignore) {
        }
@@ -51,10 +57,10 @@ public class UpdatePersonController
 
         user.setSurname(surnameTextField.getText());
 
+        user.setAmount(new BigDecimal(advanceAmountTextField.getText()));
+
         // Update in database
         SessionFactoryManager.update(user);
-
-
 
         // Update in list
         mainScreenController.getService().updateUserTable();

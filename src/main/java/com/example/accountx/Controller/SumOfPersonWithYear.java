@@ -6,10 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import static com.example.accountx.util.Constant.*;
-import static com.example.accountx.util.UtilFX.getFormattedNumber;
 
 import java.util.stream.IntStream;
+
+import static com.example.accountx.util.Constant.*;
+import static com.example.accountx.util.UtilFX.getFormattedNumber;
 
 public class SumOfPersonWithYear
 {

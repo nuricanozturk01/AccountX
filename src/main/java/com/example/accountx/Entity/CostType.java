@@ -36,5 +36,4 @@ public class CostType
         sb.append(costType); sb.append(DELIMITER);
         return sb.toString();
     }
-
 }

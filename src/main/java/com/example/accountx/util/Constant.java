@@ -13,7 +13,7 @@ public final class Constant
     public static String ZERO = "0,00";
     public static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
     public static String DELIMITER = "~";
-    public static final String ICON = "accounting_generic.png";
+    public static final String ICON = "yedi_iklim.jpg";
     public static final int MAX_OFF_DAY = 15;
     public static final int START_YEAR = 2015;
     public static final int STOP_YEAR = LocalDate.now().getYear() + 1;
@@ -24,4 +24,6 @@ public final class Constant
     public static final String[] EXCEL_BANK_FLOW_TITLES = new String[]{"Fatura Tarihi", "Fiş Numarası", "Açıklama", "Gider Türü", "Fatura Tutarı(₺)"};
     public static final String[] EXCEL_USERS_TITLES = new String[]{"İsim", "Soyisim", "Kalan Avans Miktarı"};
     public static final String[] EXCEL_COST_TYPES_TITLES = new String[]{"Gider Türü"};
+
+    public static final String DEFAULT_BANK_FLOW_COST_TYPE = "BANK FLOW";
 }

@@ -56,6 +56,7 @@ public class AddPersonController
 
             SessionFactoryManager.add(user);
             mainScreenController.getService().addUserTable(user);
+            mainScreenController.getService().updateUserChoiceBox();
 
             UtilFX.alertScreen(Alert.AlertType.INFORMATION,"Kişi başarıyla kaydedildi!", ButtonType.OK);
         }
